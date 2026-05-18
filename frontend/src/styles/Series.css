@@ -1,0 +1,384 @@
+.series-page {
+  padding-bottom: 48px;
+}
+
+/* Page Header */
+.page-header {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-icon {
+  font-size: 40px;
+  color: var(--color-primary);
+}
+
+.header-title h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--color-text-primary);
+}
+
+.header-title p {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+/* Featured Section */
+.featured-section {
+  margin-bottom: 48px;
+}
+
+.featured-section .section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.badge {
+  background: var(--color-primary);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Series Grid */
+.series-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+/* Series Card */
+.series-card {
+  display: block;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  background: var(--color-bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all var(--transition-normal);
+}
+
+.series-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Series Poster */
+.series-poster {
+  position: relative;
+  aspect-ratio: 2/3;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--color-bg-tertiary) 0%, var(--color-bg-secondary) 100%);
+}
+
+.poster-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(229, 9, 20, 0.1) 0%, rgba(229, 9, 20, 0.05) 100%);
+}
+
+.poster-placeholder svg {
+  font-size: 48px;
+  color: var(--color-primary);
+  opacity: 0.5;
+}
+
+.anime-bg {
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(254, 202, 87, 0.05) 100%);
+}
+
+/* Series Overlay */
+.series-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.series-card:hover .series-overlay {
+  opacity: 1;
+}
+
+.play-btn {
+  width: 64px;
+  height: 64px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  transform: scale(0.8);
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 20px rgba(229, 9, 20, 0.4);
+}
+
+.play-btn:hover {
+  transform: scale(1);
+  background: var(--color-primary-light);
+  box-shadow: 0 6px 24px rgba(229, 9, 20, 0.5);
+}
+
+.series-card:hover .play-btn {
+  transform: scale(1);
+}
+
+/* Series Rating */
+.series-rating {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #f5c518;
+}
+
+.series-rating svg {
+  color: #f5c518;
+}
+
+/* Series Seasons */
+.series-seasons {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(229, 9, 20, 0.9);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+}
+
+/* Series Info */
+.series-info {
+  padding: 16px;
+}
+
+.series-info h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.series-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.genre {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.year {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.year svg {
+  font-size: 10px;
+}
+
+/* Category Section */
+.category-section {
+  margin-bottom: 48px;
+}
+
+.category-section .section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+/* CTA Section */
+.cta-section {
+  padding: 48px;
+  background: linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-tertiary) 100%);
+  border-radius: var(--border-radius-xl);
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.cta-content h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--color-text-primary);
+}
+
+.cta-content p {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  margin-bottom: 24px;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.cta-buttons .btn {
+  padding: 14px 32px;
+  font-size: 15px;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .movies-grid,
+  .series-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    margin-bottom: 24px;
+  }
+  
+  .header-title h1 {
+    font-size: 24px;
+  }
+  
+  .filters-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .search-box {
+    max-width: none;
+  }
+  
+  .filter-group {
+    justify-content: stretch;
+  }
+  
+  .filter-select {
+    flex: 1;
+  }
+  
+  .filter-select select {
+    width: 100%;
+  }
+  
+  .movies-grid,
+  .series-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .movie-poster,
+  .series-poster {
+    aspect-ratio: 2/3;
+  }
+  
+  .play-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+  
+  .movie-info,
+  .series-info {
+    padding: 12px;
+  }
+  
+  .movie-info h3,
+  .series-info h3 {
+    font-size: 13px;
+  }
+  
+  .genre,
+  .year {
+    font-size: 11px;
+  }
+  
+  .categories-list {
+    gap: 8px;
+  }
+  
+  .category-btn {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+  
+  .cta-section {
+    padding: 32px 24px;
+  }
+  
+  .cta-content h2 {
+    font-size: 22px;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+  }
+  
+  .cta-buttons .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .movies-grid,
+  .series-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .movie-info,
+  .series-info {
+    padding: 10px;
+  }
+  
+  .movie-info h3,
+  .series-info h3 {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+}
