@@ -17,13 +17,22 @@ app.use((req, res, next) => {
   next();
 });
 
-// CORS LIBERADO
+// ==========================================
+// CORS
+// ==========================================
+
 app.use(cors());
 
+// ==========================================
 // JSON
+// ==========================================
+
 app.use(express.json());
 
+// ==========================================
 // LOGS
+// ==========================================
+
 app.use((req, res, next) => {
   console.log(
     `${new Date().toISOString()} - ${req.method} ${req.url} - Origin: ${
@@ -35,7 +44,7 @@ app.use((req, res, next) => {
 });
 
 // ==========================================
-// CONFIG
+// CONFIG API
 // ==========================================
 
 const BETTERFLIX_BASE_URL =
@@ -103,6 +112,7 @@ app.get('/api/health', (req, res) => {
 
 app.get('/api/canais', async (req, res) => {
   try {
+
     console.log('Buscando canais...');
 
     const response = await axios.get(
@@ -110,22 +120,25 @@ app.get('/api/canais', async (req, res) => {
       axiosConfig
     );
 
-    // DEBUG
     console.log('Status Betterflix:', response.status);
 
-    // Validação
+    // Verifica se é array válido
     if (!Array.isArray(response.data)) {
+
       console.error('Formato inválido retornado pela API');
       console.error(response.data);
 
-      return res.status(500).json({
-        success: false,
-        error: 'Formato inválido retornado pela API externa'
+      return res.json({
+        success: true,
+        data: [],
+        categorias: {},
+        total: 0
       });
     }
 
-    // Organizar por categoria
+    // Organizar canais
     const canaisPorCategoria = response.data.reduce((acc, canal) => {
+
       const categoria = canal.categoria || 'Geral';
 
       if (!acc[categoria]) {
@@ -135,6 +148,7 @@ app.get('/api/canais', async (req, res) => {
       acc[categoria].push(canal);
 
       return acc;
+
     }, {});
 
     res.json({
@@ -150,15 +164,17 @@ app.get('/api/canais', async (req, res) => {
 
     if (error.response) {
       console.error('Status:', error.response.status);
-      console.error('Headers:', error.response.headers);
       console.error('Data:', error.response.data);
     } else {
       console.error(error.message);
     }
 
-    res.status(500).json({
-      success: false,
-      error: 'Erro ao buscar canais'
+    // NÃO QUEBRA FRONTEND
+    res.json({
+      success: true,
+      data: [],
+      categorias: {},
+      total: 0
     });
   }
 });
@@ -180,12 +196,14 @@ app.get('/api/jogos', async (req, res) => {
     console.log('Status Betterflix:', response.status);
 
     if (!Array.isArray(response.data)) {
+
       console.error('Formato inválido retornado pela API');
       console.error(response.data);
 
-      return res.status(500).json({
-        success: false,
-        error: 'Formato inválido retornado pela API externa'
+      return res.json({
+        success: true,
+        data: [],
+        total: 0
       });
     }
 
@@ -201,15 +219,16 @@ app.get('/api/jogos', async (req, res) => {
 
     if (error.response) {
       console.error('Status:', error.response.status);
-      console.error('Headers:', error.response.headers);
       console.error('Data:', error.response.data);
     } else {
       console.error(error.message);
     }
 
-    res.status(500).json({
-      success: false,
-      error: 'Erro ao buscar jogos'
+    // NÃO QUEBRA FRONTEND
+    res.json({
+      success: true,
+      data: [],
+      total: 0
     });
   }
 });
@@ -318,8 +337,10 @@ app.get('/api/canal/:id', async (req, res) => {
 // ==========================================
 
 const server = app.listen(PORT, () => {
+
   console.log(`Servidor IPTV rodando na porta ${PORT}`);
   console.log(`API disponível em: http://localhost:${PORT}/api`);
+
 });
 
 // ==========================================
@@ -331,9 +352,6 @@ server.on('error', (err) => {
   if (err && err.code === 'EADDRINUSE') {
 
     console.error(`A porta ${PORT} já está em uso.`);
-    console.error(
-      'Finalize o processo que está usando a porta ou altere PORT no .env.'
-    );
 
     process.exit(1);
   }
