@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
+
 import {
   FaArrowLeft,
   FaTv,
@@ -13,8 +15,10 @@ import '../styles/Player.css';
 
 const Player = () => {
   const { type, id } = useParams();
+
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const season = searchParams.get('season') || 1;
@@ -27,6 +31,7 @@ const Player = () => {
   let contentType = type;
 
   switch (type) {
+
     case 'movie':
       embedUrl = `${baseUrl}?id=${id}&type=movie`;
       title = 'Filme';
@@ -48,17 +53,23 @@ const Player = () => {
   }
 
   const toggleFullscreen = () => {
+
     if (!document.fullscreenElement) {
+
       document.documentElement.requestFullscreen();
       setIsFullscreen(true);
+
     } else {
+
       document.exitFullscreen();
       setIsFullscreen(false);
     }
   };
 
   const getIcon = () => {
+
     switch (contentType) {
+
       case 'movie':
         return <FaFilm />;
 
@@ -72,16 +83,24 @@ const Player = () => {
   };
 
   if (!id || !type) {
+
     return (
       <div className="player-page error">
+
         <div className="error-container">
+
           <h2>URL inválida</h2>
-          <p>O player precisa de um tipo e ID válidos.</p>
+
+          <p>
+            O player precisa de um tipo e ID válidos.
+          </p>
 
           <button onClick={() => navigate(-1)}>
             Voltar
           </button>
+
         </div>
+
       </div>
     );
   }
@@ -112,15 +131,45 @@ const Player = () => {
 
         <div className="video-wrapper">
 
-          <iframe
-            src={embedUrl}
-            title={`Player - ${title}`}
-            className="video-iframe"
-            frameBorder="0"
-            allowFullScreen
-            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-            referrerPolicy="strict-origin-when-cross-origin"
-          />
+          {/* MOBILE + CANAIS */}
+          {isMobile && contentType === 'channel' ? (
+
+            <div className="external-player">
+
+              <div className="external-message">
+
+                <h2>Canal ao Vivo</h2>
+
+                <p>
+                  Para melhor compatibilidade no celular,
+                  o canal será aberto em uma nova aba.
+                </p>
+
+                <button
+                  className="external-btn"
+                  onClick={() => window.open(embedUrl, '_blank')}
+                >
+                  ▶ Assistir Canal
+                </button>
+
+              </div>
+
+            </div>
+
+          ) : (
+
+            /* DESKTOP OU FILMES/SÉRIES */
+            <iframe
+              src={embedUrl}
+              title={`Player - ${title}`}
+              className="video-iframe"
+              frameBorder="0"
+              allowFullScreen
+              allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+
+          )}
 
         </div>
 
@@ -128,10 +177,12 @@ const Player = () => {
         <div className="player-controls">
 
           <div className="controls-left">
+
             <span className="now-playing">
               <FaTv />
               Reproduzindo: {title}
             </span>
+
           </div>
 
           <div className="controls-right">
@@ -141,7 +192,10 @@ const Player = () => {
               onClick={toggleFullscreen}
               title="Tela cheia"
             >
-              {isFullscreen ? <FaCompress /> : <FaExpand />}
+              {isFullscreen
+                ? <FaCompress />
+                : <FaExpand />
+              }
             </button>
 
           </div>
@@ -154,23 +208,27 @@ const Player = () => {
       <div className="player-info">
 
         <div className="info-card">
+
           <h3>Dicas de Uso</h3>
 
           <ul>
-            <li>Use o botão de tela cheia para melhor experiência</li>
-            <li>Atualize a página se o player travar</li>
-            <li>No celular aguarde alguns segundos para carregar</li>
+            <li>Use tela cheia para melhor experiência</li>
+            <li>Atualize a página caso o player trave</li>
+            <li>Alguns canais podem abrir externamente no celular</li>
           </ul>
+
         </div>
 
         <div className="info-card">
+
           <h3>Problemas?</h3>
 
           <ul>
-            <li>Verifique sua internet</li>
+            <li>Verifique sua conexão</li>
             <li>Teste outro navegador</li>
             <li>Limpe o cache do navegador</li>
           </ul>
+
         </div>
 
       </div>
