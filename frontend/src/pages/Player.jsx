@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import {
-  useParams,
-  useSearchParams,
-  useNavigate
-} from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
+import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 
 import {
   FaArrowLeft,
@@ -11,8 +8,7 @@ import {
   FaFilm,
   FaVideo,
   FaExpand,
-  FaCompress,
-  FaExternalLinkAlt
+  FaCompress
 } from 'react-icons/fa';
 
 import '../styles/Player.css';
@@ -24,13 +20,9 @@ const Player = () => {
 
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  const season = searchParams.get('season') || 1;
-  const episode = searchParams.get('episode') || 1;
-
-  const isMobile =
-    /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(
-      navigator.userAgent
-    );
+  // Correção dos Fallbacks
+  const season = searchParams.get('season') ?? '1';
+  const episode = searchParams.get('episode') ?? '1';
 
   const baseUrl = 'https://betterflix.click/api/player';
 
@@ -61,10 +53,10 @@ const Player = () => {
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
+      document.documentElement.requestFullscreen().catch(() => {});
       setIsFullscreen(true);
     } else {
-      document.exitFullscreen();
+      document.exitFullscreen().catch(() => {});
       setIsFullscreen(false);
     }
   };
@@ -73,21 +65,11 @@ const Player = () => {
     switch (contentType) {
       case 'movie':
         return <FaFilm />;
-
       case 'tv':
         return <FaVideo />;
-
       case 'channel':
       default:
         return <FaTv />;
-    }
-  };
-
-  const openPlayer = () => {
-    const newWindow = window.open(embedUrl, '_blank');
-
-    if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-      window.location.href = embedUrl;
     }
   };
 
@@ -96,12 +78,8 @@ const Player = () => {
       <div className="player-page error">
         <div className="error-container">
           <h2>URL inválida</h2>
-
           <p>O player precisa de um tipo e ID válidos.</p>
-
-          <button onClick={() => navigate(-1)}>
-            Voltar
-          </button>
+          <button onClick={() => navigate(-1)}>Voltar</button>
         </div>
       </div>
     );
@@ -109,167 +87,95 @@ const Player = () => {
 
   return (
     <div className="player-page">
-
-      {/* Navegação */}
+      {/* NAV */}
       <div className="player-nav">
-
-        <button
-          className="back-btn"
-          onClick={() => navigate(-1)}
-        >
-          <FaArrowLeft /> Voltar
+        <button className="back-btn" onClick={() => navigate(-1)}>
+          <FaArrowLeft />
+          Voltar
         </button>
 
         <div className="content-info">
           {getIcon()}
           <span>{title}</span>
         </div>
-
       </div>
 
-      {/* Player */}
+      {/* PLAYER */}
       <div className="player-container">
-
         <div className="video-wrapper">
-
-          {isMobile ? (
-
-            <div
-              style={{
-                width: '100%',
-                minHeight: '350px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexDirection: 'column',
-                gap: '20px',
-                background: '#111',
-                borderRadius: '12px',
-                padding: '30px'
-              }}
-            >
-              <FaTv
-                style={{
-                  fontSize: '60px',
-                  color: '#e50914'
-                }}
-              />
-
-              <h2
-                style={{
-                  color: '#fff',
-                  textAlign: 'center'
-                }}
-              >
-                Abrir Player Externo
-              </h2>
-
-              <p
-                style={{
-                  color: '#ccc',
-                  textAlign: 'center',
-                  maxWidth: '400px'
-                }}
-              >
-                Alguns canais possuem proteção contra carregamento interno
-                em celulares.
-              </p>
-
-              <button
-                onClick={openPlayer}
-                style={{
-                  background: '#e50914',
-                  color: '#fff',
-                  border: 'none',
-                  padding: '15px 25px',
-                  borderRadius: '10px',
-                  fontSize: '16px',
-                  fontWeight: 'bold',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px'
-                }}
-              >
-                <FaExternalLinkAlt />
-                Abrir Canal
-              </button>
+          {/* MOBILE + CANAIS (Corrigido para usar link nativo 'a') */}
+          {isMobile && contentType === 'channel' ? (
+            <div className="external-player">
+              <div className="external-message">
+                <h2>Canal ao Vivo</h2>
+                <p>
+                  Para melhor compatibilidade no celular, o canal será aberto diretamente em nova aba.
+                </p>
+                <a
+                  href={embedUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="external-btn"
+                  style={{ textDecoration: 'none', display: 'inline-block' }}
+                >
+                  ▶️ Assistir Canal
+                </a>
+              </div>
             </div>
-
           ) : (
-
+            /* DESKTOP OU FILMES/SÉRIES */
             <iframe
               src={embedUrl}
-              title={`Player - ${title}`}
-              allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-              allowFullScreen
-              frameBorder="0"
+              title={Player - `${title}`}
               className="video-iframe"
-              referrerPolicy="no-referrer-when-downgrade"
+              frameBorder="0"
+              allowFullScreen
+              allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+              referrerPolicy="strict-origin-when-cross-origin"
             />
-
           )}
-
         </div>
 
-        {/* Controles */}
-        {!isMobile && (
-          <div className="player-controls">
-
-            <div className="controls-left">
-              <span className="now-playing">
-                <FaTv /> Reproduzindo: {title}
-              </span>
-            </div>
-
-            <div className="controls-right">
-
-              <button
-                className="control-btn fullscreen-btn"
-                onClick={toggleFullscreen}
-                title="Tela cheia"
-              >
-                {isFullscreen ? <FaCompress /> : <FaExpand />}
-              </button>
-
-            </div>
-
+        {/* CONTROLES */}
+        <div className="player-controls">
+          <div className="controls-left">
+            <span className="now-playing">
+              <FaTv />
+              Reproduzindo: {title}
+            </span>
           </div>
-        )}
-
+[19/05/2026 17:38] Betterflix - Chat: <div className="controls-right">
+            <button
+              className="control-btn fullscreen-btn"
+              onClick={toggleFullscreen}
+              title="Tela cheia"
+            >
+              {isFullscreen ? <FaCompress /> : <FaExpand />}
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* Informações */}
+      {/* INFO */}
       <div className="player-info">
-
         <div className="info-card">
-
           <h3>Dicas de Uso</h3>
-
           <ul>
             <li>Use tela cheia para melhor experiência</li>
-            <li>Alguns canais podem abrir em página externa</li>
-            <li>Players IPTV podem variar conforme dispositivo</li>
-            <li>No celular o player externo é mais estável</li>
+            <li>Atualize a página caso o player trave</li>
+            <li>Alguns canais podem abrir externamente no celular</li>
           </ul>
-
         </div>
 
         <div className="info-card">
-
           <h3>Problemas?</h3>
-
           <ul>
-            <li>Atualize a página</li>
+            <li>Verifique sua conexão</li>
             <li>Teste outro navegador</li>
-            <li>Desative bloqueadores</li>
-            <li>Teste outra conexão</li>
+            <li>Limpe o cache do navegador</li>
           </ul>
-
         </div>
-
       </div>
-
     </div>
   );
 };
