@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaTv, FaFilm, FaVideo, FaExpand, FaCompress } from 'react-icons/fa';
 import '../styles/Player.css';
@@ -83,15 +84,34 @@ const Player = () => {
       {/* Player */}
       <div className="player-container">
         <div className="video-wrapper">
-          <iframe
-            src={embedUrl}
-            title={`Player - ${title}`}
-            allowFullScreen
-            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-            frameBorder="0"
-            className="video-iframe"
-          />
-        </div>
+
+  {isMobile ? (
+    <div className="mobile-player">
+      <button
+        className="mobile-play-btn"
+        onClick={() => window.open(embedUrl, '_blank')}
+      >
+        ▶ Abrir Player
+      </button>
+
+    </div>
+
+  ) : (
+
+    <iframe
+      src={embedUrl}
+      title={`Player - ${title}`}
+      allowFullScreen
+      allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+      frameBorder="0"
+      className="video-iframe"
+      referrerPolicy="no-referrer"
+      sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"
+    />
+
+  )}
+
+</div>
         
         {/* Controles do player */}
         <div className="player-controls">
