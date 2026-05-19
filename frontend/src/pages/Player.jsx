@@ -142,12 +142,25 @@ const Player = () => {
 
                 <p>
                   Para melhor compatibilidade no celular,
-                  o canal será aberto em uma nova aba.
+                  o canal será aberto diretamente.
                 </p>
 
                 <button
                   className="external-btn"
-                  onClick={() => window.open(embedUrl, '_blank')}
+                  onClick={() => {
+
+                    const link = document.createElement('a');
+
+                    link.href = embedUrl;
+                    link.target = '_self';
+                    link.rel = 'noopener noreferrer';
+
+                    document.body.appendChild(link);
+
+                    link.click();
+
+                    document.body.removeChild(link);
+                  }}
                 >
                   ▶ Assistir Canal
                 </button>
