@@ -17,7 +17,8 @@
   "scripts": {
     "start": "npx vite",
     "dev": "npx vite",
-    "build": "npx vite build",
+    "prebuild": "node scripts/fix-permissions.js",
+    "build": "npm run prebuild && npx vite build",
     "preview": "npx vite preview"
   },
   "browserslist": {
