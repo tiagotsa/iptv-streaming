@@ -12,6 +12,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/', (req, res) => {
+  res.send('API IPTV funcionando!');
+});
+
 // Configuração CORS SUPER SIMPLES - permite TUDO
 app.use(cors());
 app.use(express.json());
