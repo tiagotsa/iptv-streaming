@@ -12,7 +12,18 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors());
+// Configurar CORS para permitir o frontend no Vercel
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://iptv-streaming-brown.vercel.app',
+    'https://iptv-streaming.vercel.app',
+    'https://iptv-streaming-*.vercel.app'
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
 app.use(express.json());
 
 const BETTERFLIX_BASE_URL = 'https://betterflix.click/api';
