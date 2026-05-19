@@ -22,7 +22,7 @@ app.use((req, res, next) => {
   next();
 });
 
-const BETTERFLIX_BASE_URL = 'https://betterflix.click/api';
+const BETTERFLIX_BASE_URL = process.env.BETTERFLIX_API_URL || 'https://betterflix.click/api';
 
 // Rota para listar canais
 app.get('/api/canais', async (req, res) => {

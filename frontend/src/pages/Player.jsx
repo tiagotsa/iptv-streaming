@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useSearchParams, useNavigate, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaTv, FaFilm, FaVideo, FaExpand, FaCompress } from 'react-icons/fa';
-import { useCanal, useFilme, useSerie } from '../hooks/useApi';
-import Loading from '../components/Loading';
 import '../styles/Player.css';
 
 const Player = () => {
@@ -14,63 +12,28 @@ const Player = () => {
   const season = searchParams.get('season') || 1;
   const episode = searchParams.get('episode') || 1;
 
-  // Buscar dados baseado no tipo
-  const { data: canalData, loading: canalLoading, error: canalError } = useCanal(type === 'channel' ? id : null);
-  const { data: filmeData, loading: filmeLoading, error: filmeError } = useFilme(type === 'movie' ? id : null);
-  const { data: serieData, loading: serieLoading, error: serieError } = useSerie(type === 'tv' ? id : null, season, episode);
-
-  const loading = canalLoading || filmeLoading || serieLoading;
-  const error = canalError || filmeError || serieError;
-
-  // Determinar qual dado usar
-  let contentData = null;
+  const baseUrl = 'https://betterflix.click/api/player';
   let embedUrl = '';
   let title = '';
-  let contentType = '';
+  let contentType = type;
 
-  console.log('Player debug:', {
-    type,
-    id,
-    season,
-    episode,
-    loading,
-    error,
-    canalData,
-    filmeData,
-    serieData,
-  });
-
-  if (type === 'channel' && canalData) {
-    contentData = canalData.data;
-    embedUrl = contentData?.embedUrl || `https://betterflix.click/api/player?id=${id}&type=channel`;
-    title = 'Canal ao Vivo';
-    contentType = 'channel';
-  } else if (type === 'movie' && filmeData) {
-    contentData = filmeData.data;
-    embedUrl = contentData?.embedUrl || `https://betterflix.click/api/player?id=${id}&type=movie`;
-    title = 'Filme';
-    contentType = 'movie';
-  } else if (type === 'tv' && serieData) {
-    contentData = serieData.data;
-    embedUrl = contentData?.embedUrl || `https://betterflix.click/api/player?id=${id}&type=tv&season=${season}&episode=${episode}`;
-    title = 'Série';
-    contentType = 'tv';
-  }
-
-  // Fallback para URL
-  if (!embedUrl) {
-    const baseUrl = 'https://betterflix.click/api/player';
-    switch (type) {
-      case 'movie':
-        embedUrl = `${baseUrl}?id=${id}&type=movie`;
-        break;
-      case 'tv':
-        embedUrl = `${baseUrl}?id=${id}&type=tv&season=${season}&episode=${episode}`;
-        break;
-      case 'channel':
-      default:
-        embedUrl = `${baseUrl}?id=${id}&type=channel`;
-    }
+  switch (type) {
+    case 'movie':
+      embedUrl = `${baseUrl}?id=${id}&type=movie`;
+      title = 'Filme';
+      contentType = 'movie';
+      break;
+    case 'tv':
+      embedUrl = `${baseUrl}?id=${id}&type=tv&season=${season}&episode=${episode}`;
+      title = 'Série';
+      contentType = 'tv';
+      break;
+    case 'channel':
+    default:
+      embedUrl = `${baseUrl}?id=${id}&type=channel`;
+      title = 'Canal ao Vivo';
+      contentType = 'channel';
+      break;
   }
 
   const toggleFullscreen = () => {
@@ -92,22 +55,13 @@ const Player = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="player-page loading">
-        <Loading />
-        <p>Carregando player...</p>
-      </div>
-    );
-  }
-
-  if (error) {
+  if (!id || !type) {
     return (
       <div className="player-page error">
         <div className="error-container">
-          <h2>Erro ao carregar player</h2>
-          <p>{error}</p>
-          <button onClick={() => window.location.reload()}>Tentar novamente</button>
+          <h2>URL inválida</h2>
+          <p>O player precisa de um tipo e ID válidos.</p>
+          <button onClick={() => navigate(-1)}>Voltar</button>
         </div>
       </div>
     );

@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: iptv-backend
+    env: node
+    plan: free
+    region: oregon
+    branch: main
+    root: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: BETTERFLIX_API_URL
+        value: https://betterflix.click/api
+
+  - type: static_site
+    name: iptv-frontend
+    env: static
+    plan: free
+    region: oregon
+    branch: main
+    root: frontend
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://iptv-backend.onrender.com/api
