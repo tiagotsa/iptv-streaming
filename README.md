@@ -195,6 +195,13 @@ O projeto já inclui um arquivo `render.yaml` para deploy automático no Render.
 4. Push para a branch (`git push origin feature/AmazingFeature`)
 5. Abra um Pull Request
 
+
+## 👨‍💻 Sobre o Desenvolvedor
+Este projeto reflete o compromisso com a escrita de código limpo, modular e eficiente. Foi desenvolvido por:
+Tiago Almeida
+Software Developer Especialista em JavaScript Full Stack.
+
+
 ## 📝 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
