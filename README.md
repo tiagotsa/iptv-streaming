@@ -208,7 +208,8 @@ Software Developer Especialista em JavaScript Full Stack.
 
 ## 📝 Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/tiagotsa/iptv-streaming/blob/main/LICENSE)
+
 
 ## 🙏 Agradecimentos
 
