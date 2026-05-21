@@ -157,7 +157,7 @@ O projeto já inclui um arquivo `render.yaml` para deploy automático no Render.
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/tiagotsa/readme-assets/main/iptv-streaming/" alt="Descrição" width="800px">
+  <img src="https://raw.githubusercontent.com/tiagotsa/readme-assets/main/iptv-streaming/Player.PNG" alt="Descrição" width="800px">
 </p>
 
 ### Home
