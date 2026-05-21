@@ -1,5 +1,8 @@
 # IPTV Premium 🎬
 
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/tiagotsa/iptv-streaming/blob/main/LICENSE)
+
+
 Uma plataforma moderna de streaming de canais de TV, filmes e séries desenvolvida com React, Node.js e Express.
 
 ![IPTV Premium](https://img.shields.io/badge/IPTV-Premium-e50914?style=for-the-badge)
