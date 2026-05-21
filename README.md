@@ -198,6 +198,7 @@ O projeto já inclui um arquivo `render.yaml` para deploy automático no Render.
 
 ## 👨‍💻 Sobre o Desenvolvedor
 Este projeto reflete o compromisso com a escrita de código limpo, modular e eficiente. Foi desenvolvido por:
+
 Tiago Almeida
 Software Developer Especialista em JavaScript Full Stack.
 
