@@ -157,7 +157,8 @@ O projeto já inclui um arquivo `render.yaml` para deploy automático no Render.
 </p>
 
 
-                                                                ### Mobile
+
+<center>### Mobile</center>
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/tiagotsa/readme-assets/main/streaming-tiagoflix/player-server.PNG" alt="Descrição" width="800px">
