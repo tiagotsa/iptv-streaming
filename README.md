@@ -149,24 +149,18 @@ O projeto já inclui um arquivo `render.yaml` para deploy automático no Render.
 ## 📱 Telas da Aplicação
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/tiagotsa/readme-assets/main/streaming-tiagoflix/catalogo-filmes.PNG" alt="Descrição" width="800px">
+  <img src="https://raw.githubusercontent.com/tiagotsa/readme-assets/main/iptv-streaming/HomePage.PNG" alt="Descrição" width="800px">
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/tiagotsa/readme-assets/main/streaming-tiagoflix/player-filme.PNG" alt="Descrição" width="800px">
+  <img src="https://raw.githubusercontent.com/tiagotsa/readme-assets/main/iptv-streaming/PageChannel.PNG" alt="Descrição" width="800px">
 </p>
 
-
-
-<div align="center">
-
-### Mobile
-
-</div>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/tiagotsa/readme-assets/main/streaming-tiagoflix/player-server.PNG" alt="Descrição" width="800px">
+  <img src="https://raw.githubusercontent.com/tiagotsa/readme-assets/main/iptv-streaming/Player.PNG" alt="Descrição" width="800px">
 </p>
+
 
 ### Home
 - Banner principal com destaques
