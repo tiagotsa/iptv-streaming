@@ -118,9 +118,11 @@ const Player = () => {
             src={embedUrl}
             title={`Player - ${title}`}
             className="video-iframe"
+            width="100%" 
+            height="100%" 
             frameBorder="0"
             allowFullScreen
-            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+            allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write"
             referrerPolicy="strict-origin-when-cross-origin"
           />
 
