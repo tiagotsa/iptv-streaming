@@ -9,11 +9,6 @@ const featuredSeries = [
   { id: 110382, title: 'Pachinko', genre: 'Drama/Épico', year: 2022, rating: 8.6, seasons: 2 },
 ];
 
-const animeSeries = [
-  { id: 194797, title: 'Doona', genre: 'Romance/Drama', year: 2023, rating: 8.5, seasons: 1 },
-  { id: 110382, title: 'Pachinko', genre: 'Drama/Épico', year: 2022, rating: 8.6, seasons: 2 },
-];
-
 const Series = () => {
   return (
     <div className="series-page">
@@ -44,52 +39,6 @@ const Series = () => {
             >
               <div className="series-poster">
                 <div className="poster-placeholder">
-                  <FaVideo />
-                </div>
-                <div className="series-overlay">
-                  <button className="play-btn">
-                    <FaPlay />
-                  </button>
-                </div>
-                <div className="series-rating">
-                  <FaStar />
-                  <span>{series.rating}</span>
-                </div>
-                <div className="series-seasons">
-                  <span>{series.seasons} Temporadas</span>
-                </div>
-              </div>
-              <div className="series-info">
-                <h3>{series.title}</h3>
-                <div className="series-meta">
-                  <span className="genre">{series.genre}</span>
-                  <span className="year">
-                    <FaCalendar />
-                    {series.year}
-                  </span>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Animes */}
-      <section className="category-section">
-        <div className="section-header">
-          <h2>Animes</h2>
-          <span className="badge badge-anime">Animes</span>
-        </div>
-        
-        <div className="series-grid">
-          {animeSeries.map((series) => (
-            <Link
-              key={series.id}
-              to={`/serie/${series.id}`}
-              className="series-card"
-            >
-              <div className="series-poster">
-                <div className="poster-placeholder anime-bg">
                   <FaVideo />
                 </div>
                 <div className="series-overlay">
