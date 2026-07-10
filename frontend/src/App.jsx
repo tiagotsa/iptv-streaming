@@ -7,6 +7,8 @@ import Canais from './pages/Canais';
 import Filmes from './pages/Filmes';
 import Series from './pages/Series';
 import Player from './pages/Player';
+import SerieDetail from './pages/SerieDetail';
+
 import './styles/App.css';
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
             <Route path="/filmes" element={<Filmes />} />
             <Route path="/series" element={<Series />} />
             <Route path="/player/:type/:id" element={<Player />} />
+            <Route path="/serie/:id" element={<SerieDetail />} /> 
           </Routes>
         </main>
       </div>

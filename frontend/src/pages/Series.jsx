@@ -5,19 +5,13 @@ import '../styles/Series.css';
 
 // Dados de exemplo para séries (TMDB IDs reais)
 const featuredSeries = [
-  { id: 76479, title: 'The Boys', genre: 'Ação/Drama', year: 2019, rating: 8.5, seasons: 4 },
-  { id: 1399, title: 'Game of Thrones', genre: 'Fantasia/Drama', year: 2011, rating: 9.3, seasons: 8 },
-  { id: 1429, title: 'Attack on Titan', genre: 'Anime/Ação', year: 2013, rating: 9.1, seasons: 4 },
-  { id: 66732, title: 'Stranger Things', genre: 'Ficção/Mistério', year: 2016, rating: 8.7, seasons: 4 },
-  { id: 60625, title: 'Rick and Morty', genre: 'Animação/Comédia', year: 2013, rating: 9.2, seasons: 7 },
-  { id: 82856, title: 'The Mandalorian', genre: 'Ficção/Aventura', year: 2019, rating: 8.7, seasons: 3 },
+  { id: 194797, title: 'Doona', genre: 'Romance/Drama', year: 2023, rating: 8.5, seasons: 1 },
+  { id: 110382, title: 'Pachinko', genre: 'Drama/Épico', year: 2022, rating: 8.6, seasons: 2 },
 ];
 
 const animeSeries = [
-  { id: 1429, title: 'Attack on Titan', genre: 'Anime/Ação', year: 2013, rating: 9.1, seasons: 4 },
-  { id: 46260, title: 'Naruto Shippuden', genre: 'Anime/Ação', year: 2007, rating: 8.7, seasons: 21 },
-  { id: 60572, title: 'Pokémon', genre: 'Anime/Aventura', year: 1997, rating: 7.5, seasons: 26 },
-  { id: 63926, title: 'One Piece', genre: 'Anime/Aventura', year: 1999, rating: 8.9, seasons: 20 },
+  { id: 194797, title: 'Doona', genre: 'Romance/Drama', year: 2023, rating: 8.5, seasons: 1 },
+  { id: 110382, title: 'Pachinko', genre: 'Drama/Épico', year: 2022, rating: 8.6, seasons: 2 },
 ];
 
 const Series = () => {
@@ -45,7 +39,7 @@ const Series = () => {
           {featuredSeries.map((series) => (
             <Link
               key={series.id}
-              to={`/player/tv/${series.id}?season=1&episode=1`}
+              to={`/serie/${series.id}`}
               className="series-card"
             >
               <div className="series-poster">
@@ -91,7 +85,7 @@ const Series = () => {
           {animeSeries.map((series) => (
             <Link
               key={series.id}
-              to={`/player/tv/${series.id}?season=1&episode=1`}
+              to={`/serie/${series.id}`}
               className="series-card"
             >
               <div className="series-poster">
