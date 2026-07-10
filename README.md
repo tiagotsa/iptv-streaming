@@ -1,4 +1,10 @@
+
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/tiagotsa/iptv-streaming/blob/main/LICENSE)
+
+
 # IPTV Premium 🎬
+
+https://iptv-streaming-frontend.onrender.com/
 
 Uma plataforma moderna de streaming de canais de TV, filmes e séries desenvolvida com React, Node.js e Express.
 
@@ -111,7 +117,50 @@ npm start
 
 A aplicação estará disponível em `http://localhost:3000`
 
+## ☁️ Deploy no Render
+
+O projeto já inclui um arquivo `render.yaml` para deploy automático no Render.
+
+### Passos de deploy
+
+1. Crie um repositório no GitHub e envie este projeto.
+2. Acesse o painel do Render e crie um novo serviço:
+   - `Web Service` para o backend
+   - `Static Site` para o frontend
+3. Para o backend, use as seguintes configurações:
+   - Diretório: `backend`
+   - Build Command: `npm install`
+   - Start Command: `npm start`
+   - Environment Variables:
+     - `BETTERFLIX_API_URL=https://betterflix.click/api`
+4. Para o frontend, use essas configurações:
+   - Diretório: `frontend`
+   - Build Command: `npm install && npm run build`
+   - Publish Directory: `dist`
+   - Environment Variables:
+     - `VITE_API_URL=https://<seu-backend>.onrender.com/api`
+5. Se preferir, importe o `render.yaml` diretamente no Render para criar as duas services automaticamente.
+
+### Observação
+
+- O frontend precisa da URL completa do backend Render em `VITE_API_URL`.
+- Se o nome do backend for `iptv-backend`, a URL geralmente será `https://iptv-backend.onrender.com/api`.
+
 ## 📱 Telas da Aplicação
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/tiagotsa/readme-assets/main/iptv-streaming/HomePage.PNG" alt="Descrição" width="800px">
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/tiagotsa/readme-assets/main/iptv-streaming/PageChannel.PNG" alt="Descrição" width="800px">
+</p>
+
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/tiagotsa/readme-assets/main/iptv-streaming/Player.PNG" alt="Descrição" width="800px">
+</p>
+
 
 ### Home
 - Banner principal com destaques
@@ -166,9 +215,18 @@ A aplicação estará disponível em `http://localhost:3000`
 4. Push para a branch (`git push origin feature/AmazingFeature`)
 5. Abra um Pull Request
 
+
+## 👨‍💻 Sobre o Desenvolvedor
+Este projeto reflete o compromisso com a escrita de código limpo, modular e eficiente. Foi desenvolvido por:
+
+Tiago Almeida
+Software Developer Especialista em JavaScript Full Stack.
+
+
 ## 📝 Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/tiagotsa/iptv-streaming/blob/main/LICENSE)
+
 
 ## 🙏 Agradecimentos
 
